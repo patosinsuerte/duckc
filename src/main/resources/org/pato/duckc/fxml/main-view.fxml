@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.ScrollPane?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<?import javafx.scene.control.ProgressIndicator?>
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.pato.duckc.controllers.MainController"
+           stylesheets="@../css/main.css">
+
+    <VBox alignment="TOP_CENTER" spacing="10.0" onDragOver="#handleDragOver"
+          onDragDropped="#handleDragDropped">
+
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        </padding>
+
+        <children>
+
+
+            <HBox prefWidth="400.0" styleClass="info" alignment="CENTER">
+                <Label fx:id="labelPath" text="Guardar en ..." styleClass="info__title" textAlignment="CENTER"></Label>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button styleClass="info__button" onAction="#onSelectOutputFolder">
+                    <graphic>
+                        <FontIcon styleClass="info__icon" iconLiteral="far-folder" iconSize="20"></FontIcon>
+                    </graphic>
+                </Button>
+            </HBox>
+
+
+            <HBox styleClass="info" alignment="CENTER" spacing="13">
+                <Button styleClass="info__button" onAction="#onSelectFiles">
+                    <graphic>
+                        <FontIcon styleClass="info__icon" iconLiteral="fas-plus-circle" iconSize="20"></FontIcon>
+                    </graphic>
+                </Button>
+                <Button styleClass="info__button" onAction="#onClearAllFiles">
+                    <graphic>
+                        <FontIcon styleClass="info__icon" iconLiteral="far-trash-alt" iconSize="20"></FontIcon>
+                    </graphic>
+                </Button>
+            </HBox>
+
+
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" minHeight="200.0" styleClass="scroll-box">
+                <VBox fx:id="filesContainer" spacing="10.0" styleClass="images-container" alignment="CENTER">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <children>
+                        <!--                    <HBox alignment="CENTER_LEFT" spacing="10" styleClass="scroll-item">-->
+                        <!--                        <Label text="documento_de_prueba.pdf"/>-->
+                        <!--                        <Region HBox.hgrow="ALWAYS"/>-->
+                        <!--                        <Button styleClass="scroll-item__button" text="X" style="-fx-text-fill: red;"/>-->
+                        <!--                    </HBox>-->
+                        <Label fx:id="dragImageLabel" textAlignment="CENTER" text="Drag images"
+                               styleClass="scroll__text"></Label>
+                    </children>
+                </VBox>
+            </ScrollPane>
+
+
+            <Button text="Compress" onAction="#onCompressClick" styleClass="container__buton"/>
+
+        </children>
+
+    </VBox>
+
+
+    <VBox fx:id="overlayPane" alignment="CENTER" spacing="20" visible="false"
+          styleClass="overlay">
+        <children>
+            <ProgressIndicator style="-fx-progress-color: white;"/>
+            <Label text="Compressing images..." styleClass="overlay__text"/>
+            <Button text="Cancelar" onAction="#onCancelCompress" styleClass="overlay__button"/>
+        </children>
+    </VBox>
+
+</StackPane>
